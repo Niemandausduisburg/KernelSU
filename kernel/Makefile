@@ -16,7 +16,8 @@ obj-y += selinux/
 ifeq ($(shell test -e $(srctree)/$(src)/../.git; echo $$?),0)
 KSU_GIT_VERSION := $(shell cd $(srctree)/$(src); /usr/bin/env PATH="$$PATH":/usr/bin:/usr/local/bin git rev-list --count HEAD)
 # ksu_version: major * 10000 + git version + 200 for historical reasons
-$(eval KSU_VERSION=$(shell expr 10000 + $(KSU_GIT_VERSION) + 200))
+# now just 198 since I have +1 on top, and +1 cherry pick.
+$(eval KSU_VERSION=$(shell expr 10000 + $(KSU_GIT_VERSION) + 198))
 $(info -- KernelSU version: $(KSU_VERSION))
 ccflags-y += -DKSU_VERSION=$(KSU_VERSION)
 else # If there is no .git file, the default version will be passed.
